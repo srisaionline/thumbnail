@@ -20,7 +20,7 @@ input:focus,textarea:focus{outline:3px solid #1769aa22;border-color:var(--blue)}
 .output{display:none}.output.show{display:block}.outhead,.fieldhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.outhead h2{margin:0}
 .long{min-height:190px}.tags{min-height:75px}.count{font-weight:700;color:#555}.over{color:#c62828!important}.status{color:#16834a;min-height:18px;margin-top:7px}.foot{text-align:center;color:var(--muted);font-size:12px;padding:12px 0 25px}
 @media(max-width:650px){.wrap{margin:12px auto;padding:0 10px}.card{padding:15px}.grid,.actions{grid-template-columns:1fr}.channel{min-width:100%}.btn{width:100%;min-height:47px}.previews img{width:calc(33.333% - 7px);height:auto;aspect-ratio:4/3}textarea{font-size:16px}}
-
+  
 /* Premium Creator Studio visual refresh */
 body{background:radial-gradient(circle at 8% 0%,#e6edff 0,transparent 28%),radial-gradient(circle at 95% 12%,#fce7f3 0,transparent 25%),#f3f5fb}
 .wrap{max-width:1120px;margin:24px auto;padding:0 18px}
@@ -54,6 +54,19 @@ input:focus,textarea:focus,select:focus{outline:3px solid #3988e51c;border-color
 .output{border-color:#b9d1f1;background:linear-gradient(145deg,#fff,#f8fbff)}
 .foot{letter-spacing:.03em}
 @media(max-width:650px){.hero{padding:22px 19px;border-radius:20px}.hero-main{margin:18px 0}.hero-mark{width:76px;height:76px;flex-basis:76px;border-radius:20px}.hero-mark small{font-size:7px}.hero p{font-size:13px}.hero-bottom span{font-size:10px}.wrap{padding:0 10px}}
+
+
+/* High-visibility colour chips and colourful section/header titles */
+.palette-grid .choice{min-height:42px;padding:8px 11px;background:#fff;box-shadow:0 2px 7px #16284b0a}
+.palette-grid .choice:hover{border-color:#7198d1;transform:translateY(-1px)}
+.palette-grid .choice:has(input:checked){background:linear-gradient(110deg,#eaf4ff,#f8efff);border-color:#2868b2;box-shadow:0 0 0 2px #2868b222}
+.palette-grid .swatch{display:inline-block!important;visibility:visible!important;opacity:1!important;flex:0 0 27px;width:27px;height:27px;min-width:27px;border:2px solid #fff;outline:1px solid #9aa7b8;border-radius:8px;box-shadow:0 2px 5px #0002}
+.choice input[type=radio]{accent-color:#245ca8;flex:0 0 auto}
+.card h2{padding:10px 13px;border-radius:11px;color:#fff;background:linear-gradient(100deg,#173c78 0%,#5a2b82 55%,#b13b78 100%);box-shadow:0 5px 14px #263c7020}
+.hero{background:linear-gradient(115deg,#091b46 0%,#174ea6 38%,#7135a5 70%,#bd397c 100%)}
+.hero h1{display:inline-block;padding:10px 16px 12px;border-radius:14px;background:linear-gradient(100deg,#ffcf4a 0%,#ff8b3d 45%,#ed4c91 100%);color:#17213e;text-shadow:0 1px 0 #ffffff70;box-shadow:0 8px 22px #070d2e55}
+.hero h1 span{display:block;color:#fff;background:none;-webkit-text-fill-color:#fff;text-shadow:0 2px 5px #17213e88}
+@media(max-width:650px){.hero{padding:23px 18px}.hero h1{padding:9px 11px}.palette-grid .choice{width:100%}}
 
 </style></head>
 <body><main class="wrap">
@@ -91,35 +104,86 @@ input:focus,textarea:focus,select:focus{outline:3px solid #3988e51c;border-color
 
 <section class="card"><h2>3. Thumbnail text and colours</h2>
 <label>Exact thumbnail headline (optional)</label><input id="headline" type="text" placeholder="e.g. నెల సరుకులు.. ఇంటి పనులు!">
-<label>Headline text colour</label><div class="choices">
-<label class="choice"><input type="radio" name="tc" value="AI choose" checked> AI choose</label><label class="choice"><input type="radio" name="tc" value="yellow"> Yellow</label><label class="choice"><input type="radio" name="tc" value="white"> White</label><label class="choice"><input type="radio" name="tc" value="yellow and white"> Yellow + white</label><label class="choice"><input type="radio" name="tc" value="white and yellow"> White + yellow</label></div>
-<label>Tri-colour title palette</label><div class="choices">
-<label class="choice"><input type="radio" name="tri" value="none" checked> None</label><label class="choice"><input type="radio" name="tri" value="electric blue, bright magenta, golden yellow"> <span class="swatch" style="background:linear-gradient(90deg,#168bff 33%,#ff2d9a 33% 66%,#ffd400 66%)"></span> Blue · Pink · Gold</label><label class="choice"><input type="radio" name="tri" value="purple, cyan, vivid orange"> Purple · Cyan · Orange</label><label class="choice"><input type="radio" name="tri" value="hot pink, violet, bright yellow"> Pink · Violet · Yellow</label><label class="choice"><input type="radio" name="tri" value="turquoise, coral, warm gold"> <span class="swatch" style="background:linear-gradient(90deg,#00bdb0 33%,#ff6257 33% 66%,#ffc247 66%)"></span> Turquoise · Coral · Gold</label>
-<label class="choice"><input type="radio" name="tri" value="emerald green, champagne gold, ivory white"> <span class="swatch" style="background:linear-gradient(90deg,#087a55 33%,#e8c66a 33% 66%,#fff4dc 66%)"></span> Emerald · Champagne · Ivory</label>
-<label class="choice"><input type="radio" name="tri" value="royal blue, silver, ice white"> <span class="swatch" style="background:linear-gradient(90deg,#1746a2 33%,#bfc9d8 33% 66%,#f8fbff 66%)"></span> Royal Blue · Silver · White</label>
-<label class="choice"><input type="radio" name="tri" value="crimson red, antique gold, cream"> <span class="swatch" style="background:linear-gradient(90deg,#b51f3b 33%,#d9a441 33% 66%,#fff0d4 66%)"></span> Crimson · Antique Gold · Cream</label>
-<label class="choice"><input type="radio" name="tri" value="midnight navy, electric cyan, neon lime"> <span class="swatch" style="background:linear-gradient(90deg,#101c3d 33%,#00d8f5 33% 66%,#b8e62e 66%)"></span> Navy · Cyan · Lime</label>
-<label class="choice"><input type="radio" name="tri" value="lavender purple, rose pink, pearl white"> <span class="swatch" style="background:linear-gradient(90deg,#8c69c9 33%,#f08ab6 33% 66%,#fff5fb 66%)"></span> Lavender · Rose · Pearl</label>
-<label class="choice"><input type="radio" name="tri" value="burnt orange, deep teal, warm ivory"> <span class="swatch" style="background:linear-gradient(90deg,#d95b21 33%,#075b61 33% 66%,#fff0d8 66%)"></span> Orange · Deep Teal · Ivory</label></div>
-<label>Double-colour title palette</label><div class="choices">
-<label class="choice"><input type="radio" name="dbl" value="none" checked> None</label><label class="choice"><input type="radio" name="dbl" value="yellow and black"> Yellow + Black</label><label class="choice"><input type="radio" name="dbl" value="white and red"> White + Red</label><label class="choice"><input type="radio" name="dbl" value="cyan and dark navy"> Cyan + Navy</label><label class="choice"><input type="radio" name="dbl" value="gold and deep purple"> Gold + Purple</label><label class="choice"><input type="radio" name="dbl" value="pink and white"> <span class="swatch" style="background:linear-gradient(90deg,#ff1688 50%,#fff 50%)"></span> Pink + White</label>
-<label class="choice"><input type="radio" name="dbl" value="emerald green and champagne gold"> <span class="swatch" style="background:linear-gradient(90deg,#087a55 50%,#e8c66a 50%)"></span> Emerald + Gold</label>
-<label class="choice"><input type="radio" name="dbl" value="royal blue and silver"> <span class="swatch" style="background:linear-gradient(90deg,#1746a2 50%,#c5cedb 50%)"></span> Royal Blue + Silver</label>
-<label class="choice"><input type="radio" name="dbl" value="crimson red and cream"> <span class="swatch" style="background:linear-gradient(90deg,#b51f3b 50%,#fff0d4 50%)"></span> Crimson + Cream</label>
-<label class="choice"><input type="radio" name="dbl" value="orange and deep teal"> <span class="swatch" style="background:linear-gradient(90deg,#e96b27 50%,#075b61 50%)"></span> Orange + Teal</label>
-<label class="choice"><input type="radio" name="dbl" value="lavender and pearl white"> <span class="swatch" style="background:linear-gradient(90deg,#9674d4 50%,#fff5fb 50%)"></span> Lavender + Pearl</label>
-<label class="choice"><input type="radio" name="dbl" value="copper and charcoal black"> <span class="swatch" style="background:linear-gradient(90deg,#bd713c 50%,#25262b 50%)"></span> Copper + Charcoal</label>
-<label class="choice"><input type="radio" name="dbl" value="mint green and dark forest"> <span class="swatch" style="background:linear-gradient(90deg,#8ee0bd 50%,#124b3c 50%)"></span> Mint + Forest</label></div>
-<label>Background behind title text</label><div class="choices">
-<label class="choice"><input type="radio" name="banner" value="NO BANNER" checked> None / no banner</label><label class="choice"><input type="radio" name="banner" value="green banner"> Green</label><label class="choice"><input type="radio" name="banner" value="pink banner"> Pink</label><label class="choice"><input type="radio" name="banner" value="red banner"> Red</label><label class="choice"><input type="radio" name="banner" value="maroon banner"> Maroon</label><label class="choice"><input type="radio" name="banner" value="purple banner"> Purple</label><label class="choice"><input type="radio" name="banner" value="blue banner"> Blue</label><label class="choice"><input type="radio" name="banner" value="black banner"> Black</label></div>
-<label>Scene colour mood</label><div class="choices">
-<label class="choice"><input type="radio" name="scene" value="natural topic-matched colours" checked> Natural</label><label class="choice"><input type="radio" name="scene" value="natural vibrant greens and warm golden daylight"> Green + Gold</label><label class="choice"><input type="radio" name="scene" value="warm pink and golden festival colours"> Pink + Gold</label><label class="choice"><input type="radio" name="scene" value="cool blue and teal cinematic colours"> Blue + Teal</label><label class="choice"><input type="radio" name="scene" value="earthy village browns and greens"> Earthy village</label><label class="choice"><input type="radio" name="scene" value="bright realistic multicolour festival palette"> Festival colours</label>
-<label class="choice"><input type="radio" name="scene" value="premium warm beige, cream and soft brown tones"> Beige · Cream · Brown</label>
-<label class="choice"><input type="radio" name="scene" value="royal purple, gold and deep plum cinematic tones"> Royal Purple · Gold</label>
-<label class="choice"><input type="radio" name="scene" value="fresh mint green, aqua and soft white tones"> Mint · Aqua · White</label>
-<label class="choice"><input type="radio" name="scene" value="sunset orange, rose pink and warm amber tones"> Sunset · Rose · Amber</label>
-<label class="choice"><input type="radio" name="scene" value="deep navy, silver and cool white premium tones"> Navy · Silver · White</label>
-<label class="choice"><input type="radio" name="scene" value="monsoon teal, leafy green and earthy natural tones"> Monsoon Teal · Leafy Green</label></div></section>
+<label>Headline text colour</label>
+<div class="choices palette-grid">
+<label class="choice"><input type="radio" name="tc" value="AI choose" checked><span class="swatch" style="background:conic-gradient(#ffdf00 0 25%,#fff 25% 50%,#111 50% 75%,#168bff 75%)"></span> AI choose</label>
+<label class="choice"><input type="radio" name="tc" value="bright yellow"><span class="swatch" style="background:#ffdf00"></span> Bright Yellow</label>
+<label class="choice"><input type="radio" name="tc" value="pure white"><span class="swatch" style="background:#fff"></span> Pure White</label>
+<label class="choice"><input type="radio" name="tc" value="gold"><span class="swatch" style="background:#e8b84a"></span> Gold</label>
+<label class="choice"><input type="radio" name="tc" value="electric cyan"><span class="swatch" style="background:#00dfff"></span> Electric Cyan</label>
+<label class="choice"><input type="radio" name="tc" value="hot pink"><span class="swatch" style="background:#ff1688"></span> Hot Pink</label>
+<label class="choice"><input type="radio" name="tc" value="lime green"><span class="swatch" style="background:#b7ed32"></span> Lime Green</label>
+<label class="choice"><input type="radio" name="tc" value="orange"><span class="swatch" style="background:#ff7a18"></span> Orange</label>
+<label class="choice"><input type="radio" name="tc" value="lavender"><span class="swatch" style="background:#ad8cff"></span> Lavender</label>
+<label class="choice"><input type="radio" name="tc" value="coral"><span class="swatch" style="background:#ff665e"></span> Coral</label>
+</div>
+
+<label>Tri-colour title palette</label><div class="choices palette-grid">
+<label class="choice"><input type="radio" name="tri" value="none" checked><span class="swatch" style="background:linear-gradient(90deg,#fff 50%,#ddd 50%)"></span> None</label>
+<label class="choice"><input type="radio" name="tri" value="electric blue, bright magenta, golden yellow"><span class="swatch" style="background:linear-gradient(90deg,#168bff 33%,#ff2d9a 33% 66%,#ffd400 66%)"></span> Blue · Pink · Gold</label>
+<label class="choice"><input type="radio" name="tri" value="purple, cyan, vivid orange"><span class="swatch" style="background:linear-gradient(90deg,#853cff 33%,#00d9ff 33% 66%,#ff7a00 66%)"></span> Purple · Cyan · Orange</label>
+<label class="choice"><input type="radio" name="tri" value="hot pink, violet, bright yellow"><span class="swatch" style="background:linear-gradient(90deg,#ff1688 33%,#773bff 33% 66%,#ffed00 66%)"></span> Pink · Violet · Yellow</label>
+<label class="choice"><input type="radio" name="tri" value="turquoise, coral, warm gold"><span class="swatch" style="background:linear-gradient(90deg,#00bdb0 33%,#ff6257 33% 66%,#ffc247 66%)"></span> Turquoise · Coral · Gold</label>
+<label class="choice"><input type="radio" name="tri" value="emerald green, champagne gold, ivory white"><span class="swatch" style="background:linear-gradient(90deg,#087a55 33%,#e8c66a 33% 66%,#fff4dc 66%)"></span> Emerald · Champagne · Ivory</label>
+<label class="choice"><input type="radio" name="tri" value="royal blue, silver, ice white"><span class="swatch" style="background:linear-gradient(90deg,#1746a2 33%,#bfc9d8 33% 66%,#f8fbff 66%)"></span> Royal Blue · Silver · White</label>
+<label class="choice"><input type="radio" name="tri" value="crimson red, antique gold, cream"><span class="swatch" style="background:linear-gradient(90deg,#b51f3b 33%,#d9a441 33% 66%,#fff0d4 66%)"></span> Crimson · Antique Gold · Cream</label>
+<label class="choice"><input type="radio" name="tri" value="midnight navy, electric cyan, neon lime"><span class="swatch" style="background:linear-gradient(90deg,#101c3d 33%,#00d8f5 33% 66%,#b8e62e 66%)"></span> Navy · Cyan · Lime</label>
+<label class="choice"><input type="radio" name="tri" value="lavender purple, rose pink, pearl white"><span class="swatch" style="background:linear-gradient(90deg,#8c69c9 33%,#f08ab6 33% 66%,#fff5fb 66%)"></span> Lavender · Rose · Pearl</label>
+<label class="choice"><input type="radio" name="tri" value="burnt orange, deep teal, warm ivory"><span class="swatch" style="background:linear-gradient(90deg,#d95b21 33%,#075b61 33% 66%,#fff0d8 66%)"></span> Orange · Deep Teal · Ivory</label>
+<label class="choice"><input type="radio" name="tri" value="cobalt blue, neon green, white"><span class="swatch" style="background:linear-gradient(90deg,#244be8 33%,#a6f02d 33% 66%,#fff 66%)"></span> Cobalt · Neon Green · White</label>
+<label class="choice"><input type="radio" name="tri" value="burgundy, blush pink, rose gold"><span class="swatch" style="background:linear-gradient(90deg,#701d3b 33%,#f2a7bd 33% 66%,#c98b65 66%)"></span> Burgundy · Blush · Rose Gold</label>
+<label class="choice"><input type="radio" name="tri" value="teal, mango yellow, charcoal"><span class="swatch" style="background:linear-gradient(90deg,#087f83 33%,#ffc629 33% 66%,#292d32 66%)"></span> Teal · Mango · Charcoal</label>
+</div>
+
+<label>Double-colour title palette</label><div class="choices palette-grid">
+<label class="choice"><input type="radio" name="dbl" value="none" checked><span class="swatch" style="background:linear-gradient(90deg,#fff 50%,#ddd 50%)"></span> None</label>
+<label class="choice"><input type="radio" name="dbl" value="yellow and black"><span class="swatch" style="background:linear-gradient(90deg,#ffdf00 50%,#171717 50%)"></span> Yellow + Black</label>
+<label class="choice"><input type="radio" name="dbl" value="white and red"><span class="swatch" style="background:linear-gradient(90deg,#fff 50%,#e51d2a 50%)"></span> White + Red</label>
+<label class="choice"><input type="radio" name="dbl" value="cyan and dark navy"><span class="swatch" style="background:linear-gradient(90deg,#00e5ff 50%,#102044 50%)"></span> Cyan + Navy</label>
+<label class="choice"><input type="radio" name="dbl" value="gold and deep purple"><span class="swatch" style="background:linear-gradient(90deg,#ffc247 50%,#54208f 50%)"></span> Gold + Purple</label>
+<label class="choice"><input type="radio" name="dbl" value="pink and white"><span class="swatch" style="background:linear-gradient(90deg,#ff1688 50%,#fff 50%)"></span> Pink + White</label>
+<label class="choice"><input type="radio" name="dbl" value="emerald green and champagne gold"><span class="swatch" style="background:linear-gradient(90deg,#087a55 50%,#e8c66a 50%)"></span> Emerald + Gold</label>
+<label class="choice"><input type="radio" name="dbl" value="royal blue and silver"><span class="swatch" style="background:linear-gradient(90deg,#1746a2 50%,#c5cedb 50%)"></span> Royal Blue + Silver</label>
+<label class="choice"><input type="radio" name="dbl" value="crimson red and cream"><span class="swatch" style="background:linear-gradient(90deg,#b51f3b 50%,#fff0d4 50%)"></span> Crimson + Cream</label>
+<label class="choice"><input type="radio" name="dbl" value="orange and deep teal"><span class="swatch" style="background:linear-gradient(90deg,#e96b27 50%,#075b61 50%)"></span> Orange + Teal</label>
+<label class="choice"><input type="radio" name="dbl" value="lavender and pearl white"><span class="swatch" style="background:linear-gradient(90deg,#9674d4 50%,#fff5fb 50%)"></span> Lavender + Pearl</label>
+<label class="choice"><input type="radio" name="dbl" value="copper and charcoal black"><span class="swatch" style="background:linear-gradient(90deg,#bd713c 50%,#25262b 50%)"></span> Copper + Charcoal</label>
+<label class="choice"><input type="radio" name="dbl" value="mint green and dark forest"><span class="swatch" style="background:linear-gradient(90deg,#8ee0bd 50%,#124b3c 50%)"></span> Mint + Forest</label>
+<label class="choice"><input type="radio" name="dbl" value="coral and midnight blue"><span class="swatch" style="background:linear-gradient(90deg,#ff665e 50%,#101c3d 50%)"></span> Coral + Midnight</label>
+<label class="choice"><input type="radio" name="dbl" value="lemon yellow and royal purple"><span class="swatch" style="background:linear-gradient(90deg,#ffe34d 50%,#51248b 50%)"></span> Lemon + Purple</label>
+</div>
+
+<label>Background behind title text</label><div class="choices palette-grid">
+<label class="choice"><input type="radio" name="banner" value="NO BANNER" checked><span class="swatch" style="background:linear-gradient(90deg,#fff 50%,#ddd 50%)"></span> None / no banner</label>
+<label class="choice"><input type="radio" name="banner" value="green banner"><span class="swatch" style="background:#08733b"></span> Green</label>
+<label class="choice"><input type="radio" name="banner" value="pink banner"><span class="swatch" style="background:#ec167b"></span> Pink</label>
+<label class="choice"><input type="radio" name="banner" value="red banner"><span class="swatch" style="background:#c51f2f"></span> Red</label>
+<label class="choice"><input type="radio" name="banner" value="maroon banner"><span class="swatch" style="background:#6b1027"></span> Maroon</label>
+<label class="choice"><input type="radio" name="banner" value="purple banner"><span class="swatch" style="background:#6d28a8"></span> Purple</label>
+<label class="choice"><input type="radio" name="banner" value="blue banner"><span class="swatch" style="background:#1457a6"></span> Blue</label>
+<label class="choice"><input type="radio" name="banner" value="black banner"><span class="swatch" style="background:#171717"></span> Black</label>
+<label class="choice"><input type="radio" name="banner" value="orange banner"><span class="swatch" style="background:#f07816"></span> Orange</label>
+<label class="choice"><input type="radio" name="banner" value="teal banner"><span class="swatch" style="background:#087f83"></span> Teal</label>
+<label class="choice"><input type="radio" name="banner" value="gold banner"><span class="swatch" style="background:#d6a93a"></span> Gold</label>
+<label class="choice"><input type="radio" name="banner" value="navy banner"><span class="swatch" style="background:#102044"></span> Navy</label>
+</div>
+
+<label>Scene colour mood</label><div class="choices palette-grid">
+<label class="choice"><input type="radio" name="scene" value="natural topic-matched colours" checked><span class="swatch" style="background:linear-gradient(90deg,#6b9b50,#c7a56b)"></span> Natural</label>
+<label class="choice"><input type="radio" name="scene" value="natural vibrant greens and warm golden daylight"><span class="swatch" style="background:linear-gradient(90deg,#2c8b46,#f4bd56)"></span> Green + Gold</label>
+<label class="choice"><input type="radio" name="scene" value="warm pink and golden festival colours"><span class="swatch" style="background:linear-gradient(90deg,#ed5799,#ffcb55)"></span> Pink + Gold</label>
+<label class="choice"><input type="radio" name="scene" value="cool blue and teal cinematic colours"><span class="swatch" style="background:linear-gradient(90deg,#1457a6,#28b7b1)"></span> Blue + Teal</label>
+<label class="choice"><input type="radio" name="scene" value="earthy village browns and greens"><span class="swatch" style="background:linear-gradient(90deg,#8a5a36,#477548)"></span> Earthy Village</label>
+<label class="choice"><input type="radio" name="scene" value="bright realistic multicolour festival palette"><span class="swatch" style="background:linear-gradient(90deg,#ed4242,#f5c542,#42a95a,#4384e8)"></span> Festival Colours</label>
+<label class="choice"><input type="radio" name="scene" value="premium warm beige, cream and soft brown tones"><span class="swatch" style="background:linear-gradient(90deg,#d7bd98,#fff0d8,#8b6848)"></span> Beige · Cream · Brown</label>
+<label class="choice"><input type="radio" name="scene" value="royal purple, gold and deep plum cinematic tones"><span class="swatch" style="background:linear-gradient(90deg,#54208f,#ffc247,#32113f)"></span> Royal Purple · Gold</label>
+<label class="choice"><input type="radio" name="scene" value="fresh mint green, aqua and soft white tones"><span class="swatch" style="background:linear-gradient(90deg,#8ee0bd,#5ad8d0,#fff)"></span> Mint · Aqua · White</label>
+<label class="choice"><input type="radio" name="scene" value="sunset orange, rose pink and warm amber tones"><span class="swatch" style="background:linear-gradient(90deg,#f07816,#e8799d,#ffc247)"></span> Sunset · Rose · Amber</label>
+<label class="choice"><input type="radio" name="scene" value="deep navy, silver and cool white premium tones"><span class="swatch" style="background:linear-gradient(90deg,#101c3d,#bfc9d8,#fff)"></span> Navy · Silver · White</label>
+<label class="choice"><input type="radio" name="scene" value="monsoon teal, leafy green and earthy natural tones"><span class="swatch" style="background:linear-gradient(90deg,#087f83,#39834b,#8a6a45)"></span> Monsoon Teal · Leafy Green</label>
+<label class="choice"><input type="radio" name="scene" value="black, red and metallic gold dramatic cinematic tones"><span class="swatch" style="background:linear-gradient(90deg,#171717,#c51f2f,#d9a441)"></span> Black · Red · Gold</label>
+<label class="choice"><input type="radio" name="scene" value="pastel peach, lilac and cream soft tones"><span class="swatch" style="background:linear-gradient(90deg,#ffc6a8,#b9a0df,#fff0d8)"></span> Peach · Lilac · Cream</label>
+</div></section>
 
 <section class="card"><h2>4. Upload reference photos <span class="mini">(optional)</span></h2><div class="upload"><label>Choose reference images</label><input id="photos" type="file" accept="image/*" multiple><p class="hint">Previews are local only. Attach the same photos to your AI image tool with the generated prompt.</p><div class="previews" id="previews"></div></div></section>
 
