@@ -43,12 +43,10 @@ body{background:radial-gradient(circle at 8% 0%,#e6edff 0,transparent 28%),radia
 .btn{border-radius:12px;transition:transform .15s ease,box-shadow .15s ease}.btn:hover{transform:translateY(-1px);box-shadow:0 6px 15px #172b4d18}
 .primary{background:linear-gradient(110deg,#172b55,#245ca8 60%,#7144a3);color:#fff}
 .secondary{background:#f8faff;border:1px solid #d6dfed;color:#233858}
-.copy{background:linear-gradient(110deg,#eaf4ff,#f2edff);color:#254b83;border:1px solid #d6e1f4}
-.seo-generate{color:#fff;background:linear-gradient(105deg,#ff7a18 0%,#e83e8c 48%,#7048d8 100%);box-shadow:0 6px 16px #a33d9b35}
-.seo-generate:hover{filter:saturate(1.15) brightness(1.04)}
-.separate-btn{background:linear-gradient(105deg,#087f83 0%,#1769aa 48%,#7048d8 100%);color:#fff}
-#combinedSEO{min-height:220px;background:linear-gradient(145deg,#fff,#f8faff)}
-
+ .copy{background:linear-gradient(110deg,#eaf4ff,#f2edff);color:#254b83;border:1px solid #d6e1f4}
+.seo-generate{background:linear-gradient(105deg,#ff7a18,#e83e8c 50%,#7048d8);color:#fff;box-shadow:0 6px 16px #a33d9b35}
+.separate-btn{background:linear-gradient(105deg,#087f83,#1769aa 52%,#7048d8);color:#fff}
+#combinedSEO{min-height:190px;background:linear-gradient(145deg,#fff,#f8faff)}
 input[type=text],input[type=url],input[type=number],textarea,select{border-color:#d5ddea;border-radius:11px}
 input:focus,textarea:focus,select:focus{outline:3px solid #3988e51c;border-color:#3988e5}
 .channel{border-radius:15px;background:linear-gradient(145deg,#fbfdff,#f4f7ff);border-color:#e0e7f3}
@@ -196,10 +194,10 @@ input:focus,textarea:focus,select:focus{outline:3px solid #3988e51c;border-color
 
 <section class="card output" id="promptOutput"><div class="outhead"><h2 id="promptHeading">Generated prompt</h2><button class="btn copy" id="copyPrompt">▢ Copy prompt</button></div><textarea id="promptResult" class="long" readonly></textarea><div id="promptStatus" class="status"></div></section>
 
-<section class="card" id="seoFields"><h2>6. Copy-ready SEO results</h2><p class="hint">First paste the complete combined answer from your AI tool in the box below. Then tap “Separate Title, Description &amp; Tags”. The three individual fields will be filled automatically. You can also edit or paste into each field manually.</p>
-<label for="combinedSEO">Paste complete AI-generated response here (title + description + tags)</label>
-<textarea id="combinedSEO" class="long" placeholder="Paste the complete AI response here, including YOUTUBE TITLE, VIDEO DESCRIPTION and YOUTUBE TAGS sections..."></textarea>
-<div class="actions"><button class="btn primary separate-btn" id="separateSEO">✦ Separate Title, Description &amp; Tags</button><button class="btn secondary" id="clearCombined">Clear combined box</button></div>
+<section class="card" id="seoFields"><h2>6. Copy-ready SEO results</h2><p class="hint">Paste the complete AI response below. The separator recognises common heading styles (including numbered, bold and descriptive headings), then fills the three editable fields for individual copying.</p>
+<label for="combinedSEO">Paste combined AI-generated title + description + tags</label>
+<textarea id="combinedSEO" class="long" placeholder="Paste the entire AI response here..."></textarea>
+<div class="actions"><button class="btn separate-btn" id="separateSEO">✦ Separate Title, Description &amp; Tags</button><button class="btn secondary" id="clearCombined">Clear combined response</button></div>
 <div id="parseStatus" class="status" aria-live="polite"></div>
 <hr style="border:0;border-top:1px solid #e4e7ec;margin:20px 0">
 <div class="fieldhead"><label>YouTube title</label><button class="btn copy" data-copy="finalTitle">▢ Copy title</button></div><textarea id="finalTitle" placeholder="Paste final title…"></textarea><div id="titleLimit" class="count">0 / 100 characters</div>
@@ -271,72 +269,103 @@ Return EXACTLY ONE continuous comma-separated line ready to paste into YouTube S
 Keep title within 100 characters and tags within 500 characters. Return exactly YOUTUBE TITLE, VIDEO DESCRIPTION, YOUTUBE TAGS. No extra commentary.`}
 function show(mode){if(!v('title')){$('busy').textContent='Please enter a video title or topic first.';return}let d=data();$('promptHeading').textContent=mode==='thumb'?'Professional Thumbnail Generation Prompt':'YouTube SEO Prompt';$('promptResult').value=mode==='thumb'?thumbnail(d):seo(d);$('promptOutput').classList.add('show');$('busy').textContent='Prompt generated. Copy it and paste into your AI tool.';$('promptOutput').scrollIntoView({behavior:'smooth',block:'start'})}
 $('thumbBtn').onclick=()=>show('thumb');$('seoBtn').onclick=()=>show('seo');
-async function copy(text){if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);let t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();let ok=document.execCommand('copy');t.remove();if(!ok)throw Error('Copy failed')}
+async function copy(text){
+  if(!text){throw new Error('Nothing to copy');}
+  // Preferred route: modern Clipboard API (available on HTTPS/localhost).
+  if(navigator.clipboard && window.isSecureContext){
+    try{await navigator.clipboard.writeText(text);return true;}catch(err){/* try legacy route below */}
+  }
+  // Android Chrome opened from a local content:// or file:// URL may not expose
+  // Clipboard API. Use a visible, focused temporary textarea for legacy copy.
+  const t=document.createElement('textarea');
+  t.value=text;t.readOnly=true;t.setAttribute('aria-hidden','true');
+  t.style.position='fixed';t.style.left='8px';t.style.top='8px';
+  t.style.width='2px';t.style.height='2px';t.style.padding='0';
+  t.style.border='0';t.style.outline='0';t.style.boxShadow='none';
+  t.style.background='transparent';t.style.color='transparent';
+  t.style.opacity='0.02';t.style.zIndex='2147483647';t.style.fontSize='16px';
+  document.body.appendChild(t);
+  t.focus({preventScroll:true});t.select();t.setSelectionRange(0,t.value.length);
+  let ok=false;
+  try{ok=document.execCommand('copy');}catch(err){ok=false;}
+  t.remove();
+  if(ok)return true;
+  throw new Error('Clipboard access is blocked by this browser');
+}
 $('copyPrompt').onclick=async()=>{try{await copy(v('promptResult'));$('promptStatus').textContent='✓ Prompt copied.'}catch(e){$('promptStatus').textContent='Select and copy the prompt manually.'}};
-document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{try{await copy($(b.dataset.copy).value);$('copyStatus').textContent='✓ Copied successfully.'}catch(e){$('copyStatus').textContent='Copy failed; select and copy manually.'}});
-$('copyAll').onclick=async()=>{let s=`YOUTUBE TITLE\n${v('finalTitle')}\n\nVIDEO DESCRIPTION\n${v('finalDescription')}\n\nYOUTUBE TAGS\n${v('finalTags')}`;try{await copy(s);$('copyStatus').textContent='✓ Title, description and tags copied together.'}catch(e){$('copyStatus').textContent='Copy failed; copy each field manually.'}};
+document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{
+ const field=$(b.dataset.copy);
+ try{await copy(field.value);$('copyStatus').textContent='✓ '+(b.textContent||'Text')+' copied successfully.';}
+ catch(e){
+   field.focus();field.select();field.setSelectionRange(0,field.value.length);
+   $('copyStatus').textContent='Your browser blocked automatic copying. The text is selected now; tap Copy in the Android pop-up menu.';
+ }
+});
+$('copyAll').onclick=async()=>{
+ let s=`YOUTUBE TITLE\n${v('finalTitle')}\n\nVIDEO DESCRIPTION\n${v('finalDescription')}\n\nYOUTUBE TAGS\n${v('finalTags')}`;
+ try{await copy(s);$('copyStatus').textContent='✓ Title, description and tags copied together.';}
+ catch(e){
+   const field=$('combinedSEO');field.value=s;field.focus();field.select();field.setSelectionRange(0,field.value.length);
+   $('copyStatus').textContent='Automatic copying is blocked. Combined text is selected; tap Copy in the Android pop-up menu.';
+ }
+};
 $('clear').onclick=()=>{['finalTitle','finalDescription','finalTags'].forEach(x=>$(x).value='');counts();$('copyStatus').textContent='SEO fields cleared.'};
 
-function cleanSectionText(s){
-  return (s||'').replace(/^\s*[:\-–—]+\s*/,'').trim();
-}
 function separateCombinedSEO(){
-  const raw=$('combinedSEO').value.trim();
-  const status=$('parseStatus');
-  if(!raw){status.textContent='Please paste the complete AI-generated response first.';return;}
-  // Recognise numbered or unnumbered heading variants used by common AI responses.
-  const headingPatterns=[
-    {key:'title',re:/^\s*(?:\d+\s*[\).:-]?\s*)?(?:\*\*)?\s*(?:YOUTUBE\s+TITLE|VIDEO\s+TITLE|TITLE)\s*(?:\*\*)?\s*:?\s*$/im},
-    {key:'description',re:/^\s*(?:\d+\s*[\).:-]?\s*)?(?:\*\*)?\s*(?:VIDEO\s+DESCRIPTION|YOUTUBE\s+DESCRIPTION|DESCRIPTION)\s*(?:\*\*)?\s*:?\s*$/im},
-    {key:'tags',re:/^\s*(?:\d+\s*[\).:-]?\s*)?(?:\*\*)?\s*(?:YOUTUBE\s+TAGS|VIDEO\s+TAGS|TAGS|TAGS?\s*\(.*?\))\s*(?:\*\*)?\s*:?\s*$/im}
-  ];
-  const lines=raw.split(/\r?\n/);
-  const sections={title:[],description:[],tags:[]};
-  let current=null, found={title:false,description:false,tags:false};
-  for(const line of lines){
-    let matched=null;
-    for(const p of headingPatterns){
-      if(p.re.test(line)){matched=p.key;break;}
-    }
-    if(matched){current=matched;found[matched]=true;continue;}
-    if(current) sections[current].push(line);
-  }
-  // Also support compact responses where a heading and its content share one line.
-  if(!found.title || !found.description || !found.tags){
-    const inline = raw.match(/(?:YOUTUBE\s+TITLE|TITLE)\s*:\s*([\s\S]*?)(?:VIDEO\s+DESCRIPTION|DESCRIPTION)\s*:\s*([\s\S]*?)(?:YOUTUBE\s+TAGS|TAGS)\s*:\s*([\s\S]*)/i);
-    if(inline){
-      if(!found.title) sections.title=inline[1].split(/\r?\n/);
-      if(!found.description) sections.description=inline[2].split(/\r?\n/);
-      if(!found.tags) sections.tags=inline[3].split(/\r?\n/);
-      found={title:true,description:true,tags:true};
-    }
-  }
-  const result={
-    title:cleanSectionText(sections.title.join('\n').replace(/^\s*(?:title\s*:\s*)/i,'')),
-    description:cleanSectionText(sections.description.join('\n').replace(/^\s*(?:description\s*:\s*)/i,'')),
-    tags:cleanSectionText(sections.tags.join(' ').replace(/^\s*(?:tags?\s*:\s*)/i,''))
-  };
-  // Remove markdown fences, bullets and surrounding bold markers from the extracted values.
-  result.title=result.title.replace(/^```[^\n]*\n?|\n?```$/g,'').replace(/^\s*(?:[-*•]\s*)/,'').replace(/^\*\*(.*?)\*\*$/,'$1').trim();
-  result.description=result.description.replace(/^```[^\n]*\n?|\n?```$/g,'').replace(/^\*\*(.*?)\*\*$/,'$1').trim();
-  result.tags=result.tags.replace(/^```[^\n]*\n?|\n?```$/g,'').replace(/^\*\*(.*?)\*\*$/,'$1').replace(/\s*,\s*/g,', ').replace(/\s+/g,' ').trim();
-  const missing=[];
-  if(!found.title || !result.title) missing.push('title');
-  if(!found.description || !result.description) missing.push('description');
-  if(!found.tags || !result.tags) missing.push('tags');
-  if(missing.length){
-    status.textContent='Could not confidently find: '+missing.join(', ')+'. Please check that your AI response includes clear YOUTUBE TITLE, VIDEO DESCRIPTION and YOUTUBE TAGS headings. Your original response is still in the combined box.';
-    return;
-  }
-  $('finalTitle').value=result.title;
-  $('finalDescription').value=result.description;
-  $('finalTags').value=result.tags;
-  counts();
-  status.textContent='✓ Separated successfully! Review the three fields below, then copy each one separately.';
-  $('finalTitle').scrollIntoView({behavior:'smooth',block:'center'});
+ const raw=$('combinedSEO').value.trim(),status=$('parseStatus');
+ if(!raw){status.textContent='Paste the complete AI response into the combined box first.';return;}
+ const sections={title:[],description:[],tags:[]};
+ const seen={title:false,description:false,tags:false};
+ let active=null;
+ const lines=raw.replace(/\r/g,'').split('\n');
+ function identifyHeading(line){
+   // Strip common Markdown decoration and numbering before testing the heading.
+   let x=line.trim().replace(/^#{1,6}\s*/,'').replace(/^\s*(?:\d+[\.\):\-]\s*)/,'')
+     .replace(/^\*\*/,'').replace(/\*\*$/,'').replace(/^[🎯📝🏷️📌➡️🔹\s]+/u,'').trim();
+   // A heading must start with one of the labels; descriptive suffixes are allowed.
+   const m=x.match(/^(YOUTUBE\s+TITLE|VIDEO\s+TITLE|TITLE|VIDEO\s+DESCRIPTION|YOUTUBE\s+DESCRIPTION|DESCRIPTION|YOUTUBE\s+TAGS|VIDEO\s+TAGS|TAGS)\b(.*)$/i);
+   if(!m)return null;
+   const label=m[1].toUpperCase();
+   const key=label.includes('TITLE')?'title':label.includes('DESCRIPTION')?'description':'tags';
+   let rest=(m[2]||'').trim();
+   // Remove qualifiers such as "(100 characters)" or "(comma-separated)".
+   rest=rest.replace(/^\([^)]*\)\s*/,'').replace(/^(?:[-–—:：]\s*)/,'').replace(/^\*\*/,'').trim();
+   // Heading-only line is valid; if there is a colon, text after it is same-line content.
+   if(!rest || /^[:：\-–—]?$/.test(rest)) return {key,content:''};
+   if(rest.startsWith(':')||rest.startsWith('：')) rest=rest.slice(1).trim();
+   return {key,content:rest};
+ }
+ for(const line of lines){
+   const h=identifyHeading(line);
+   if(h){active=h.key;seen[active]=true;if(h.content)sections[active].push(h.content);continue;}
+   if(active)sections[active].push(line);
+ }
+ // Also handle compact labelled responses if headings and their content share paragraphs.
+ if(!(seen.title&&seen.description&&seen.tags)){
+   const compact=raw.match(/(?:YOUTUBE\s+TITLE|VIDEO\s+TITLE|TITLE)\s*(?:\([^)]*\))?\s*[:：]\s*([\s\S]*?)(?:VIDEO\s+DESCRIPTION|YOUTUBE\s+DESCRIPTION|DESCRIPTION)\s*(?:\([^)]*\))?\s*[:：]\s*([\s\S]*?)(?:YOUTUBE\s+TAGS|VIDEO\s+TAGS|TAGS)\s*(?:\([^)]*\))?\s*[:：]\s*([\s\S]*)/i);
+   if(compact){sections.title=[compact[1]];sections.description=[compact[2]];sections.tags=[compact[3]];seen.title=seen.description=seen.tags=true;}
+ }
+ const clean=(arr)=>arr.join('\n').replace(/^\s*```(?:\w+)?\s*/,'').replace(/\s*```\s*$/,'').trim();
+ let title=clean(sections.title).replace(/^\s*(?:[-*•]\s*)/,'').replace(/^\*\*(.*?)\*\*$/,'$1').trim();
+ let description=clean(sections.description).replace(/^\*\*(.*?)\*\*$/,'$1').trim();
+ let tags=clean(sections.tags).replace(/^\*\*(.*?)\*\*$/,'$1')
+   .replace(/^\s*(?:[-*•]\s*)/,'').replace(/[\r\n]+/g,' ')
+   .replace(/\s*,\s*/g,', ').replace(/\s+/g,' ').trim();
+ // Remove trailing section labels accidentally included in the previous section.
+ const missing=[];
+ if(!seen.title||!title)missing.push('title');
+ if(!seen.description||!description)missing.push('description');
+ if(!seen.tags||!tags)missing.push('tags');
+ if(missing.length){
+   status.textContent='Could not identify '+missing.join(', ')+'. Keep the response in this box and check that it contains separate Title, Description and Tags headings. Try pasting the complete AI answer, not only part of it.';
+   return;
+ }
+ $('finalTitle').value=title;$('finalDescription').value=description;$('finalTags').value=tags;counts();
+ status.textContent='✓ Separated successfully. Check the three fields below, then copy each one separately.';
+ $('finalTitle').scrollIntoView({behavior:'smooth',block:'center'});
 }
 $('separateSEO').onclick=separateCombinedSEO;
-$('clearCombined').onclick=()=>{$('combinedSEO').value='';$('parseStatus').textContent='Combined response box cleared.';};
+$('clearCombined').onclick=()=>{$('combinedSEO').value='';$('parseStatus').textContent='Combined response cleared.';};
 
 function counts(){let a=$('finalTitle').value.length,b=$('finalTags').value.length;$('titleLimit').textContent=a+' / 100 characters'+(a>100?' — over limit':'');$('tagsLimit').textContent=b+' / 500 characters'+(b>500?' — over limit':'');$('titleLimit').classList.toggle('over',a>100);$('tagsLimit').classList.toggle('over',b>500)}
 $('finalTitle').oninput=counts;$('finalTags').oninput=counts;$('title').oninput=()=>{$('titleCount').textContent=$('title').value.length+' characters · Suggested title maximum: 100';$('titleCount').classList.toggle('over',$('title').value.length>100)};
