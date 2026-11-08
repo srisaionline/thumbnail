@@ -44,6 +44,11 @@ body{background:radial-gradient(circle at 8% 0%,#e6edff 0,transparent 28%),radia
 .primary{background:linear-gradient(110deg,#172b55,#245ca8 60%,#7144a3);color:#fff}
 .secondary{background:#f8faff;border:1px solid #d6dfed;color:#233858}
 .copy{background:linear-gradient(110deg,#eaf4ff,#f2edff);color:#254b83;border:1px solid #d6e1f4}
+.seo-generate{color:#fff;background:linear-gradient(105deg,#ff7a18 0%,#e83e8c 48%,#7048d8 100%);box-shadow:0 6px 16px #a33d9b35}
+.seo-generate:hover{filter:saturate(1.15) brightness(1.04)}
+.separate-btn{background:linear-gradient(105deg,#087f83 0%,#1769aa 48%,#7048d8 100%);color:#fff}
+#combinedSEO{min-height:220px;background:linear-gradient(145deg,#fff,#f8faff)}
+
 input[type=text],input[type=url],input[type=number],textarea,select{border-color:#d5ddea;border-radius:11px}
 input:focus,textarea:focus,select:focus{outline:3px solid #3988e51c;border-color:#3988e5}
 .channel{border-radius:15px;background:linear-gradient(145deg,#fbfdff,#f4f7ff);border-color:#e0e7f3}
@@ -187,11 +192,16 @@ input:focus,textarea:focus,select:focus{outline:3px solid #3988e51c;border-color
 
 <section class="card"><h2>4. Upload reference photos <span class="mini">(optional)</span></h2><div class="upload"><label>Choose reference images</label><input id="photos" type="file" accept="image/*" multiple><p class="hint">Previews are local only. Attach the same photos to your AI image tool with the generated prompt.</p><div class="previews" id="previews"></div></div></section>
 
-<section class="card"><h2>5. Generate prompts</h2><div class="actions"><button class="btn primary" id="thumbBtn">✦ Generate Thumbnail Prompt</button><button class="btn secondary" id="seoBtn">☷ Generate SEO Prompt</button></div><p class="hint">Prompts are generated locally; this page does not call an AI service or automatically create the final image/metadata.</p><div id="busy" class="status"></div></section>
+<section class="card"><h2>5. Generate prompts</h2><div class="actions"><button class="btn primary" id="thumbBtn">✦ Generate Thumbnail Prompt</button><button class="btn seo-generate" id="seoBtn">✦ Generate SEO Prompt</button></div><p class="hint">Prompts are generated locally; this page does not call an AI service or automatically create the final image/metadata.</p><div id="busy" class="status"></div></section>
 
 <section class="card output" id="promptOutput"><div class="outhead"><h2 id="promptHeading">Generated prompt</h2><button class="btn copy" id="copyPrompt">▢ Copy prompt</button></div><textarea id="promptResult" class="long" readonly></textarea><div id="promptStatus" class="status"></div></section>
 
-<section class="card" id="seoFields"><h2>6. Copy-ready SEO results</h2><p class="hint">Paste the finished AI-generated title, description and tags below. Copy each separately, or copy all three together. Tags remain one comma-separated line for direct pasting into YouTube Studio.</p>
+<section class="card" id="seoFields"><h2>6. Copy-ready SEO results</h2><p class="hint">First paste the complete combined answer from your AI tool in the box below. Then tap “Separate Title, Description &amp; Tags”. The three individual fields will be filled automatically. You can also edit or paste into each field manually.</p>
+<label for="combinedSEO">Paste complete AI-generated response here (title + description + tags)</label>
+<textarea id="combinedSEO" class="long" placeholder="Paste the complete AI response here, including YOUTUBE TITLE, VIDEO DESCRIPTION and YOUTUBE TAGS sections..."></textarea>
+<div class="actions"><button class="btn primary separate-btn" id="separateSEO">✦ Separate Title, Description &amp; Tags</button><button class="btn secondary" id="clearCombined">Clear combined box</button></div>
+<div id="parseStatus" class="status" aria-live="polite"></div>
+<hr style="border:0;border-top:1px solid #e4e7ec;margin:20px 0">
 <div class="fieldhead"><label>YouTube title</label><button class="btn copy" data-copy="finalTitle">▢ Copy title</button></div><textarea id="finalTitle" placeholder="Paste final title…"></textarea><div id="titleLimit" class="count">0 / 100 characters</div>
 <div class="fieldhead"><label>Video description</label><button class="btn copy" data-copy="finalDescription">▢ Copy description</button></div><textarea id="finalDescription" class="long" placeholder="Paste complete description…"></textarea>
 <div class="fieldhead"><label>YouTube tags — comma-separated single line</label><button class="btn copy" data-copy="finalTags">▢ Copy all tags</button></div><textarea id="finalTags" class="tags" placeholder="tag one, tag two, తెలుగు ట్యాగ్"></textarea><div id="tagsLimit" class="count">0 / 500 characters</div>
@@ -266,6 +276,68 @@ $('copyPrompt').onclick=async()=>{try{await copy(v('promptResult'));$('promptSta
 document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{try{await copy($(b.dataset.copy).value);$('copyStatus').textContent='✓ Copied successfully.'}catch(e){$('copyStatus').textContent='Copy failed; select and copy manually.'}});
 $('copyAll').onclick=async()=>{let s=`YOUTUBE TITLE\n${v('finalTitle')}\n\nVIDEO DESCRIPTION\n${v('finalDescription')}\n\nYOUTUBE TAGS\n${v('finalTags')}`;try{await copy(s);$('copyStatus').textContent='✓ Title, description and tags copied together.'}catch(e){$('copyStatus').textContent='Copy failed; copy each field manually.'}};
 $('clear').onclick=()=>{['finalTitle','finalDescription','finalTags'].forEach(x=>$(x).value='');counts();$('copyStatus').textContent='SEO fields cleared.'};
+
+function cleanSectionText(s){
+  return (s||'').replace(/^\s*[:\-–—]+\s*/,'').trim();
+}
+function separateCombinedSEO(){
+  const raw=$('combinedSEO').value.trim();
+  const status=$('parseStatus');
+  if(!raw){status.textContent='Please paste the complete AI-generated response first.';return;}
+  // Recognise numbered or unnumbered heading variants used by common AI responses.
+  const headingPatterns=[
+    {key:'title',re:/^\s*(?:\d+\s*[\).:-]?\s*)?(?:\*\*)?\s*(?:YOUTUBE\s+TITLE|VIDEO\s+TITLE|TITLE)\s*(?:\*\*)?\s*:?\s*$/im},
+    {key:'description',re:/^\s*(?:\d+\s*[\).:-]?\s*)?(?:\*\*)?\s*(?:VIDEO\s+DESCRIPTION|YOUTUBE\s+DESCRIPTION|DESCRIPTION)\s*(?:\*\*)?\s*:?\s*$/im},
+    {key:'tags',re:/^\s*(?:\d+\s*[\).:-]?\s*)?(?:\*\*)?\s*(?:YOUTUBE\s+TAGS|VIDEO\s+TAGS|TAGS|TAGS?\s*\(.*?\))\s*(?:\*\*)?\s*:?\s*$/im}
+  ];
+  const lines=raw.split(/\r?\n/);
+  const sections={title:[],description:[],tags:[]};
+  let current=null, found={title:false,description:false,tags:false};
+  for(const line of lines){
+    let matched=null;
+    for(const p of headingPatterns){
+      if(p.re.test(line)){matched=p.key;break;}
+    }
+    if(matched){current=matched;found[matched]=true;continue;}
+    if(current) sections[current].push(line);
+  }
+  // Also support compact responses where a heading and its content share one line.
+  if(!found.title || !found.description || !found.tags){
+    const inline = raw.match(/(?:YOUTUBE\s+TITLE|TITLE)\s*:\s*([\s\S]*?)(?:VIDEO\s+DESCRIPTION|DESCRIPTION)\s*:\s*([\s\S]*?)(?:YOUTUBE\s+TAGS|TAGS)\s*:\s*([\s\S]*)/i);
+    if(inline){
+      if(!found.title) sections.title=inline[1].split(/\r?\n/);
+      if(!found.description) sections.description=inline[2].split(/\r?\n/);
+      if(!found.tags) sections.tags=inline[3].split(/\r?\n/);
+      found={title:true,description:true,tags:true};
+    }
+  }
+  const result={
+    title:cleanSectionText(sections.title.join('\n').replace(/^\s*(?:title\s*:\s*)/i,'')),
+    description:cleanSectionText(sections.description.join('\n').replace(/^\s*(?:description\s*:\s*)/i,'')),
+    tags:cleanSectionText(sections.tags.join(' ').replace(/^\s*(?:tags?\s*:\s*)/i,''))
+  };
+  // Remove markdown fences, bullets and surrounding bold markers from the extracted values.
+  result.title=result.title.replace(/^```[^\n]*\n?|\n?```$/g,'').replace(/^\s*(?:[-*•]\s*)/,'').replace(/^\*\*(.*?)\*\*$/,'$1').trim();
+  result.description=result.description.replace(/^```[^\n]*\n?|\n?```$/g,'').replace(/^\*\*(.*?)\*\*$/,'$1').trim();
+  result.tags=result.tags.replace(/^```[^\n]*\n?|\n?```$/g,'').replace(/^\*\*(.*?)\*\*$/,'$1').replace(/\s*,\s*/g,', ').replace(/\s+/g,' ').trim();
+  const missing=[];
+  if(!found.title || !result.title) missing.push('title');
+  if(!found.description || !result.description) missing.push('description');
+  if(!found.tags || !result.tags) missing.push('tags');
+  if(missing.length){
+    status.textContent='Could not confidently find: '+missing.join(', ')+'. Please check that your AI response includes clear YOUTUBE TITLE, VIDEO DESCRIPTION and YOUTUBE TAGS headings. Your original response is still in the combined box.';
+    return;
+  }
+  $('finalTitle').value=result.title;
+  $('finalDescription').value=result.description;
+  $('finalTags').value=result.tags;
+  counts();
+  status.textContent='✓ Separated successfully! Review the three fields below, then copy each one separately.';
+  $('finalTitle').scrollIntoView({behavior:'smooth',block:'center'});
+}
+$('separateSEO').onclick=separateCombinedSEO;
+$('clearCombined').onclick=()=>{$('combinedSEO').value='';$('parseStatus').textContent='Combined response box cleared.';};
+
 function counts(){let a=$('finalTitle').value.length,b=$('finalTags').value.length;$('titleLimit').textContent=a+' / 100 characters'+(a>100?' — over limit':'');$('tagsLimit').textContent=b+' / 500 characters'+(b>500?' — over limit':'');$('titleLimit').classList.toggle('over',a>100);$('tagsLimit').classList.toggle('over',b>500)}
 $('finalTitle').oninput=counts;$('finalTags').oninput=counts;$('title').oninput=()=>{$('titleCount').textContent=$('title').value.length+' characters · Suggested title maximum: 100';$('titleCount').classList.toggle('over',$('title').value.length>100)};
 $('photos').onchange=e=>{let box=$('previews');box.innerHTML='';Array.from(e.target.files||[]).slice(0,8).forEach(f=>{let im=document.createElement('img');im.src=URL.createObjectURL(f);im.alt=f.name;box.appendChild(im)})};sync();counts();
