@@ -1,384 +1,141 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YouTube Creator Studio — 2 Channels</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1769aa"><title>YouTube Creator Studio</title>
 <style>
-:root{--ink:#171717;--muted:#666;--line:#e4e6eb;--bg:#f4f6f9;--accent:#1769aa}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,Arial,sans-serif}
-.wrap{max-width:1000px;margin:28px auto;padding:0 16px}
-.top{margin-bottom:20px}
-.eyebrow{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#1769aa}
-.top h1{font-size:clamp(27px,5vw,38px);line-height:1.1;margin:8px 0}
-.top p,.hint{color:var(--muted)}
-.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;margin:16px 0;box-shadow:0 5px 20px #00000006}
-h2{font-size:18px;margin:0 0 14px}
-label{display:block;font-size:13px;font-weight:700;margin:13px 0 6px}
-input[type=text],input[type=url],input[type=number],textarea,select{width:100%;border:1px solid #d4d8df;border-radius:10px;padding:11px 12px;background:white;color:#171717;font:inherit}
-textarea{min-height:88px;resize:vertical}
-input:focus,textarea:focus,select:focus{outline:2px solid #1769aa30;border-color:#1769aa}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.hint{font-size:12px;margin-top:5px}
-.channel-switch{display:flex;gap:10px;flex-wrap:wrap}
-.channel-option{border:1px solid var(--line);border-radius:12px;padding:12px;flex:1;min-width:220px;display:flex;align-items:center;gap:10px;cursor:pointer}
-.channel-option:has(input:checked){border-color:#1769aa;background:#eef6ff;box-shadow:0 0 0 1px #1769aa inset}
-.channel-option input{accent-color:#1769aa}
-.choices{display:flex;gap:8px;flex-wrap:wrap}
-.choice{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13px;cursor:pointer}
-.choice:has(input:checked){border-color:#222;background:#f7f7f7}
-.choice input{accent-color:#171717}
-.swatch{display:inline-block;width:18px;height:18px;border-radius:5px;border:1px solid #0002;vertical-align:middle;flex-shrink:0}
-.upload{border:1.5px dashed #c8cbd1;border-radius:12px;padding:16px;background:#fafbfc}
-.previews{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.previews img{width:100px;height:76px;object-fit:cover;border:1px solid var(--line);border-radius:8px}
-.actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
-.btn{border:0;border-radius:10px;padding:12px 14px;font:700 14px system-ui;cursor:pointer;min-height:46px}
-.primary{background:#171717;color:#fff}
-.secondary{background:#fff;border:1px solid #cbd0d8;color:#171717}
-.btn:hover{filter:brightness(.95)}
-.output{display:none}
-.output.show{display:block}
-.outhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.result{white-space:pre-wrap;overflow-wrap:anywhere;background:#f7f8fa;border:1px solid #e7e9ee;border-radius:10px;padding:14px;margin-top:12px;font-size:13px;max-height:520px;overflow:auto}
-.mini{font-size:12px;color:var(--muted)}
-.foot{text-align:center;color:var(--muted);font-size:12px;padding:8px 0 26px}
-.count{font-weight:700;font-size:12px;color:#555}
-.count.over{color:#c62828}
-.hidden{display:none!important}
-@media(max-width:650px){
-    .wrap{margin:12px auto;padding:0 10px}
-    .card{padding:15px;border-radius:13px}
-    .grid,.grid3,.actions{grid-template-columns:1fr}
-    .channel-option{min-width:0;width:100%}
-    .choice{max-width:100%;font-size:13px}
-    .btn{width:100%;min-height:48px}
-    .previews img{width:calc(33.333% - 8px);height:auto;aspect-ratio:4/3}
-    textarea{font-size:16px}
-}
-</style>
-</head>
-<body>
-<main class="wrap">
-    <header class="top">
-        <div class="eyebrow">Creator toolkit · two channel profiles</div>
-        <h1>YouTube Creator Studio</h1>
-        <p>Switch between your two channel profiles and create copy-ready thumbnail and YouTube SEO prompts locally, without APIs.</p>
-    </header>
+:root{--ink:#171923;--muted:#667085;--line:#e4e7ec;--bg:#f3f6fb;--blue:#1769aa}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,Arial,sans-serif}
+.wrap{max-width:1050px;margin:24px auto;padding:0 15px}.top{margin-bottom:20px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.1;margin:8px 0}h2{font-size:18px;margin:0 0 14px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:21px;margin:16px 0;box-shadow:0 6px 24px #1018280a}
+p,.hint{color:var(--muted)}.hint,.mini,.count,.status{font-size:12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+label{display:block;font-size:13px;font-weight:700;margin:13px 0 6px}input[type=text],textarea{width:100%;border:1px solid #d0d5dd;border-radius:10px;padding:11px 12px;font:inherit;color:var(--ink);background:#fff}textarea{min-height:85px;resize:vertical}
+input:focus,textarea:focus{outline:3px solid #1769aa22;border-color:var(--blue)}.channels,.choices{display:flex;gap:9px;flex-wrap:wrap}
+.channel{flex:1;min-width:220px;border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer}.channel:has(input:checked){border-color:var(--blue);background:#eef6ff}
+.choice{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:9px;padding:7px 9px;margin:0;font-size:13px;cursor:pointer}.choice:has(input:checked){border-color:#344054;background:#f8fafc}
+.swatch{width:17px;height:17px;border:1px solid #0002;border-radius:4px;display:inline-block}.upload{border:1.5px dashed #c8cbd1;border-radius:12px;padding:15px;background:#fafbfc}
+.previews{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px}.previews img{width:100px;height:75px;object-fit:cover;border-radius:8px}
+.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:15px}.btn{border:0;border-radius:10px;padding:11px 14px;min-height:44px;font:700 14px system-ui;cursor:pointer}
+.primary{background:#171923;color:#fff}.secondary{background:#fff;border:1px solid #cbd0d8}.copy{background:#edf5ff;color:#14558b;border:1px solid #c9e0f7}
+.output{display:none}.output.show{display:block}.outhead,.fieldhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.outhead h2{margin:0}
+.long{min-height:190px}.tags{min-height:75px}.count{font-weight:700;color:#555}.over{color:#c62828!important}.status{color:#16834a;min-height:18px;margin-top:7px}.foot{text-align:center;color:var(--muted);font-size:12px;padding:12px 0 25px}
+@media(max-width:650px){.wrap{margin:12px auto;padding:0 10px}.card{padding:15px}.grid,.actions{grid-template-columns:1fr}.channel{min-width:100%}.btn{width:100%;min-height:47px}.previews img{width:calc(33.333% - 7px);height:auto;aspect-ratio:4/3}textarea{font-size:16px}}
+</style></head>
+<body><main class="wrap">
+<header class="top"><div class="eyebrow">Creator toolkit · two channel profiles</div><h1>YouTube Creator Studio</h1><p>Create detailed thumbnail prompts and copy-ready YouTube SEO prompts for either channel. Runs locally in your browser.</p></header>
 
-    <section class="card">
-        <h2>1. Choose channel profile</h2>
-        <div class="channel-switch">
-            <label class="channel-option">
-                <input type="radio" name="channelPick" value="1" checked>
-                <span><strong>Dilip Kumar Godugu</strong><br><span id="channel1Preview">@DelixDilip</span><br><span class="mini">Daily life / creator videos</span></span>
-            </label>
-            <label class="channel-option">
-                <input type="radio" name="channelPick" value="2">
-                <span><strong>Radhika Never Before</strong><br><span id="channel2Preview">@radhikaneverbefore</span><br><span class="mini">Telangana family & daily-life vlogs</span></span>
-            </label>
-        </div>
+<section class="card"><h2>1. Choose channel profile</h2>
+<div class="channels">
+<label class="channel"><input type="radio" name="channelPick" value="1" checked> <b>Dilip Kumar Godugu</b><br><span id="h1">@DelixDilip</span><br><span class="mini">Daily life / creator videos</span></label>
+<label class="channel"><input type="radio" name="channelPick" value="2"> <b>Radhika Never Before</b><br><span id="h2">@radhikaneverbefore</span><br><span class="mini">Telangana family &amp; daily-life vlogs</span></label></div>
+<div class="grid">
+<div><label>Channel 1 name</label><input id="c1" type="text" value="Dilip Kumar Godugu"></div><div><label>Channel 1 handle</label><input id="u1" type="text" value="@DelixDilip"></div>
+<div><label>Channel 1 ID (optional)</label><input id="i1" type="text" placeholder="Actual YouTube channel ID"></div><div><label>Channel 1 description (optional)</label><textarea id="d1" placeholder="Accurate channel description"></textarea></div>
+<div><label>Channel 2 name</label><input id="c2" type="text" value="Radhika Never Before"></div><div><label>Channel 2 handle</label><input id="u2" type="text" value="@radhikaneverbefore"></div>
+<div><label>Channel 2 ID (optional)</label><input id="i2" type="text" placeholder="Actual YouTube channel ID"></div><div><label>Channel 2 description (optional)</label><textarea id="d2" placeholder="Accurate channel description"></textarea></div></div>
+<p class="hint">Only details you enter are used. Missing IDs and descriptions are omitted.</p></section>
 
-        <div class="grid">
-            <div><label for="channel1">Channel 1 name</label><input id="channel1" type="text" value="Dilip Kumar Godugu"></div>
-            <div><label for="channel1handle">Channel 1 handle or URL</label><input id="channel1handle" type="text" value="@DelixDilip"></div>
-            <div><label for="channel1id">Channel 1 ID (optional)</label><input id="channel1id" type="text" placeholder="Paste actual YouTube channel ID"></div>
-            <div><label for="channel1desc">Channel 1 description (optional)</label><textarea id="channel1desc" rows="2" placeholder="Describe this channel accurately"></textarea></div>
-            
-            <div><label for="channel2">Channel 2 name</label><input id="channel2" type="text" value="Radhika Never Before"></div>
-            <div><label for="channel2handle">Channel 2 handle or URL</label><input id="channel2handle" type="text" value="@radhikaneverbefore"></div>
-            <div><label for="channel2id">Channel 2 ID (optional)</label><input id="channel2id" type="text" placeholder="Paste actual YouTube channel ID"></div>
-            <div><label for="channel2desc">Channel 2 description (optional)</label><textarea id="channel2desc" rows="2" placeholder="Describe this channel accurately"></textarea></div>
-        </div>
-        <p class="hint">The selected channel name and handle are added automatically. Enter the real channel ID and channel description above if you want them included; the tool will not invent missing details.</p>
-    </section>
+<section class="card"><h2>2. Video details</h2>
+<label for="title">Video title / topic *</label><textarea id="title" maxlength="300" placeholder="Enter your topic in Telugu or English…"></textarea><div id="titleCount" class="count">0 characters · Suggested title maximum: 100</div>
+<div class="grid"><div><label>Video topic / niche</label><input id="topic" type="text" value="Daily life Vlogs"></div><div><label>Location / region (optional)</label><input id="location" type="text" placeholder="e.g. Telangana, Warangal"></div><div><label>Target audience</label><input id="audience" type="text" value="Telugu-speaking viewers and Telangana audience"></div><div><label>Extra keywords</label><input id="keywords" type="text" value="festival, traditions, familyvlog, dailyvlog"></div></div>
+<label>Content language</label><div class="choices"><label class="choice"><input type="radio" name="lang" value="Telugu only"> Telugu only</label><label class="choice"><input type="radio" name="lang" value="Telugu + English (Telugish)" checked> Telugu + English</label><label class="choice"><input type="radio" name="lang" value="English"> English</label><label class="choice"><input type="radio" name="lang" value="Telugu + English + Hindi where relevant"> Telugu + English + Hindi</label></div>
+<label>Extra accurate video details</label><textarea id="extra" placeholder="Add only real video details, events, people, places or supplied timestamps."></textarea><p class="hint">The generated prompt instructs the AI not to invent missing details.</p></section>
 
-    <section class="card">
-        <h2>2. Video details</h2>
-        <label for="title">Video title / topic *</label>
-        <textarea id="title" maxlength="300" placeholder="Enter your topic in Telugu or English…"></textarea>
-        <div class="count" id="titleCount">0 characters · YouTube title limit: 100</div>
-        
-        <div class="grid">
-            <div><label for="topic">Video topic / niche</label><input id="topic" type="text" value="Daily life Vlogs" placeholder="Bathukamma, village life, cooking…"></div>
-            <div><label for="location">Location / region (optional)</label><input id="location" type="text" placeholder="e.g. Telangana, Warangal"></div>
-            <div><label for="audience">Target audience / viewers</label><input id="audience" type="text" value="Telugu-speaking viewers and Telangana audience"></div>
-            <div><label for="handleOverride">Extra video keywords (optional)</label><input id="keywords" type="text" value="festival, traditions, familyvlog, dailyvlog"></div>
-        </div>
-        
-        <label>Content language</label>
-        <div class="choices">
-            <label class="choice"><input type="radio" name="lang" value="Telugu only" checked> Telugu only</label>
-            <label class="choice"><input type="radio" name="lang" value="Telugu + English (Telugish)"> Telugu + English</label>
-            <label class="choice"><input type="radio" name="lang" value="English"> English</label>
-            <label class="choice"><input type="radio" name="lang" value="Telugu + English + Hindi where relevant"> Telugu + English + Hindi</label>
-        </div>
+<section class="card"><h2>3. Thumbnail text and colours</h2>
+<label>Exact thumbnail headline (optional)</label><input id="headline" type="text" placeholder="e.g. నెల సరుకులు.. ఇంటి పనులు!">
+<label>Headline text colour</label><div class="choices">
+<label class="choice"><input type="radio" name="tc" value="AI choose" checked> AI choose</label><label class="choice"><input type="radio" name="tc" value="yellow"> Yellow</label><label class="choice"><input type="radio" name="tc" value="white"> White</label><label class="choice"><input type="radio" name="tc" value="yellow and white"> Yellow + white</label><label class="choice"><input type="radio" name="tc" value="white and yellow"> White + yellow</label></div>
+<label>Tri-colour title palette</label><div class="choices">
+<label class="choice"><input type="radio" name="tri" value="none" checked> None</label><label class="choice"><input type="radio" name="tri" value="electric blue, bright magenta, golden yellow"> <span class="swatch" style="background:linear-gradient(90deg,#168bff 33%,#ff2d9a 33% 66%,#ffd400 66%)"></span> Blue · Pink · Gold</label><label class="choice"><input type="radio" name="tri" value="purple, cyan, vivid orange"> Purple · Cyan · Orange</label><label class="choice"><input type="radio" name="tri" value="hot pink, violet, bright yellow"> Pink · Violet · Yellow</label><label class="choice"><input type="radio" name="tri" value="turquoise, coral, warm gold"> Turquoise · Coral · Gold</label></div>
+<label>Double-colour title palette</label><div class="choices">
+<label class="choice"><input type="radio" name="dbl" value="none" checked> None</label><label class="choice"><input type="radio" name="dbl" value="yellow and black"> Yellow + Black</label><label class="choice"><input type="radio" name="dbl" value="white and red"> White + Red</label><label class="choice"><input type="radio" name="dbl" value="cyan and dark navy"> Cyan + Navy</label><label class="choice"><input type="radio" name="dbl" value="gold and deep purple"> Gold + Purple</label><label class="choice"><input type="radio" name="dbl" value="pink and white"> Pink + White</label></div>
+<label>Background behind title text</label><div class="choices">
+<label class="choice"><input type="radio" name="banner" value="NO BANNER" checked> None / no banner</label><label class="choice"><input type="radio" name="banner" value="green banner"> Green</label><label class="choice"><input type="radio" name="banner" value="pink banner"> Pink</label><label class="choice"><input type="radio" name="banner" value="red banner"> Red</label><label class="choice"><input type="radio" name="banner" value="maroon banner"> Maroon</label><label class="choice"><input type="radio" name="banner" value="purple banner"> Purple</label><label class="choice"><input type="radio" name="banner" value="blue banner"> Blue</label><label class="choice"><input type="radio" name="banner" value="black banner"> Black</label></div>
+<label>Scene colour mood</label><div class="choices">
+<label class="choice"><input type="radio" name="scene" value="natural topic-matched colours" checked> Natural</label><label class="choice"><input type="radio" name="scene" value="natural vibrant greens and warm golden daylight"> Green + Gold</label><label class="choice"><input type="radio" name="scene" value="warm pink and golden festival colours"> Pink + Gold</label><label class="choice"><input type="radio" name="scene" value="cool blue and teal cinematic colours"> Blue + Teal</label><label class="choice"><input type="radio" name="scene" value="earthy village browns and greens"> Earthy village</label><label class="choice"><input type="radio" name="scene" value="bright realistic multicolour festival palette"> Festival colours</label></div></section>
 
-        <label for="descriptionData">Extra description details (add real video information)</label>
-        <textarea id="descriptionData" placeholder="What happens in the video? People/places shown, event details, credits, upload schedule, contact/social links, call to action…"></textarea>
-        <div class="hint">Only include accurate details. This information is added to the description prompt so the generated copy can be more informative without inventing events.</div>
-    </section>
+<section class="card"><h2>4. Upload reference photos <span class="mini">(optional)</span></h2><div class="upload"><label>Choose reference images</label><input id="photos" type="file" accept="image/*" multiple><p class="hint">Previews are local only. Attach the same photos to your AI image tool with the generated prompt.</p><div class="previews" id="previews"></div></div></section>
 
-    <section class="card">
-        <h2>3. Thumbnail text and colours</h2>
-        <label for="headline">Thumbnail headline text</label>
-        <input id="headline" type="text" placeholder="Leave blank to derive a short headline from the video title">
-        <div class="hint">Use short, readable text. The headline is separate from the full video title.</div>
-        
-        <label>Headline text colour</label>
-        <div class="choices" id="textColors">
-            <label class="choice"><input type="radio" name="textColor" value="none" checked><span class="swatch" style="background:linear-gradient(135deg,#fff 45%,#ddd 45% 55%,#fff 55%)"></span> None (let AI choose)</label>
-            <label class="choice"><input type="radio" name="textColor" value="yellow"><span class="swatch" style="background:#ffdf00"></span> Yellow</label>
-            <label class="choice"><input type="radio" name="textColor" value="white"><span class="swatch" style="background:#fff"></span> White</label>
-            <label class="choice"><input type="radio" name="textColor" value="yellow and white"><span class="swatch" style="background:linear-gradient(90deg,#ffdf00 50%,#fff 50%)"></span> Yellow + white</label>
-            <label class="choice"><input type="radio" name="textColor" value="white and yellow"><span class="swatch" style="background:linear-gradient(90deg,#fff 50%,#ffdf00 50%)"></span> White + yellow</label>
-        </div>
+<section class="card"><h2>5. Generate prompts</h2><div class="actions"><button class="btn primary" id="thumbBtn">✦ Generate Thumbnail Prompt</button><button class="btn secondary" id="seoBtn">☷ Generate SEO Prompt</button></div><p class="hint">Prompts are generated locally; this page does not call an AI service or automatically create the final image/metadata.</p><div id="busy" class="status"></div></section>
 
-        <label>Tri-colour title style (choose a custom palette; not Indian flag colours)</label>
-        <div class="choices">
-            <label class="choice"><input type="radio" name="triColor" value="none" checked><span class="swatch" style="background:linear-gradient(135deg,#fff 45%,#ddd 45% 55%,#fff 55%)"></span> None</label>
-            <label class="choice"><input type="radio" name="triColor" value="electric blue, bright magenta, and golden yellow"><span class="swatch" style="background:linear-gradient(90deg,#168bff 0 33%,#ff2d9a 33% 66%,#ffd400 66%)"></span> Blue · Pink · Gold</label>
-            <label class="choice"><input type="radio" name="triColor" value="purple, cyan, and vivid orange"><span class="swatch" style="background:linear-gradient(90deg,#853cff 0 33%,#00d9ff 33% 66%,#ff7a00 66%)"></span> Purple · Cyan · Orange</label>
-            <label class="choice"><input type="radio" name="triColor" value="hot pink, violet, and bright yellow"><span class="swatch" style="background:linear-gradient(90deg,#ff1688 0 33%,#773bff 33% 66%,#ffed00 66%)"></span> Pink · Violet · Yellow</label>
-            <label class="choice"><input type="radio" name="triColor" value="turquoise, coral, and warm gold"><span class="swatch" style="background:linear-gradient(90deg,#00bdb0 0 33%,#ff6257 33% 66%,#ffc247 66%)"></span> Turquoise · Coral · Gold</label>
-        </div>
+<section class="card output" id="promptOutput"><div class="outhead"><h2 id="promptHeading">Generated prompt</h2><button class="btn copy" id="copyPrompt">▢ Copy prompt</button></div><textarea id="promptResult" class="long" readonly></textarea><div id="promptStatus" class="status"></div></section>
 
-        <label>Double-colour title style</label>
-        <div class="choices">
-            <label class="choice"><input type="radio" name="doubleColor" value="none" checked><span class="swatch" style="background:linear-gradient(135deg,#fff 45%,#ddd 45% 55%,#fff 55%)"></span> None</label>
-            <label class="choice"><input type="radio" name="doubleColor" value="yellow and black"><span class="swatch" style="background:linear-gradient(90deg,#ffdf00 50%,#171717 50%)"></span> Yellow + Black</label>
-            <label class="choice"><input type="radio" name="doubleColor" value="white and red"><span class="swatch" style="background:linear-gradient(90deg,#fff 50%,#e51d2a 50%)"></span> White + Red</label>
-            <label class="choice"><input type="radio" name="doubleColor" value="cyan and dark navy"><span class="swatch" style="background:linear-gradient(90deg,#00e5ff 50%,#102044 50%)"></span> Cyan + Navy</label>
-            <label class="choice"><input type="radio" name="doubleColor" value="gold and deep purple"><span class="swatch" style="background:linear-gradient(90deg,#ffc247 50%,#54208f 50%)"></span> Gold + Purple</label>
-            <label class="choice"><input type="radio" name="doubleColor" value="pink and white"><span class="swatch" style="background:linear-gradient(90deg,#ff1688 50%,#fff 50%)"></span> Pink + White</label>
-        </div>
-
-        <label>Background behind title text (text banner only)</label>
-        <div class="choices">
-            <label class="choice"><input type="radio" name="bannerColor" value="none" checked><span class="swatch" style="background:linear-gradient(135deg,#fff 45%,#ddd 45% 55%,#fff 55%)"></span> None (no banner)</label>
-            <label class="choice"><input type="radio" name="bannerColor" value="green"><span class="swatch" style="background:#08733b"></span> Green</label>
-            <label class="choice"><input type="radio" name="bannerColor" value="pink"><span class="swatch" style="background:#ec167b"></span> Pink</label>
-            <label class="choice"><input type="radio" name="bannerColor" value="red"><span class="swatch" style="background:#c51f2f"></span> Red</label>
-            <label class="choice"><input type="radio" name="bannerColor" value="maroon"><span class="swatch" style="background:#6b1027"></span> Maroon</label>
-            <label class="choice"><input type="radio" name="bannerColor" value="purple"><span class="swatch" style="background:#6d28a8"></span> Purple</label>
-            <label class="choice"><input type="radio" name="bannerColor" value="blue"><span class="swatch" style="background:#1457a6"></span> Blue</label>
-            <label class="choice"><input type="radio" name="bannerColor" value="black"><span class="swatch" style="background:#171717"></span> Black</label>
-            <label class="choice"><input type="radio" name="bannerColor" value="pink and white"><span class="swatch" style="background:linear-gradient(90deg,#ec167b 50%,#fff 50%)"></span> Pink + white</label>
-            <label class="choice"><input type="radio" name="bannerColor" value="yellow and black"><span class="swatch" style="background:linear-gradient(90deg,#ffdf00 50%,#171717 50%)"></span> Yellow + black</label>
-            <label class="choice"><input type="radio" name="bannerColor" value="orange"><span class="swatch" style="background:#f07816"></span> Orange</label>
-        </div>
-
-        <label>Thumbnail background / scene colour mood</label>
-        <div class="choices">
-            <label class="choice"><input type="radio" name="sceneColor" value="none" checked><span class="swatch" style="background:linear-gradient(135deg,#fff 45%,#ddd 45% 55%,#fff 55%)"></span> None (natural choice)</label>
-            <label class="choice"><input type="radio" name="sceneColor" value="natural vibrant greens and warm golden daylight"><span class="swatch" style="background:linear-gradient(135deg,#2c8b46,#f4bd56)"></span> Natural green + gold</label>
-            <label class="choice"><input type="radio" name="sceneColor" value="warm pink and golden festival colours"><span class="swatch" style="background:linear-gradient(135deg,#ed5799,#ffcb55)"></span> Pink + gold</label>
-            <label class="choice"><input type="radio" name="sceneColor" value="cool blue and teal cinematic colours"><span class="swatch" style="background:linear-gradient(135deg,#1457a6,#28b7b1)"></span> Blue + teal</label>
-            <label class="choice"><input type="radio" name="sceneColor" value="earthy village colours with natural browns and greens"><span class="swatch" style="background:linear-gradient(135deg,#8a5a36,#477548)"></span> Earthy village</label>
-            <label class="choice"><input type="radio" name="sceneColor" value="bright realistic multicolour festival palette"><span class="swatch" style="background:linear-gradient(90deg,#ed4242,#f5c542,#42a95a,#4384e8,#ac56c8)"></span> Festival colours</label>
-        </div>
-    </section>
-
-    <section class="card">
-        <h2>4. Upload reference photos <span class="mini">(optional)</span></h2>
-        <div class="upload">
-            <label for="photos" style="margin-top:0">Main photo and supporting photos</label>
-            <input id="photos" type="file" accept="image/*" multiple>
-            <div class="hint">Local previews only. Attach these same photos in ChatGPT when using the generated thumbnail prompt.</div>
-            <div class="previews" id="previews"></div>
-        </div>
-    </section>
-
-    <section class="card">
-        <h2>5. Generate prompts</h2>
-        <div class="actions">
-            <button class="btn primary" id="thumbBtn" type="button">Generate Thumbnail Prompt</button>
-            <button class="btn secondary" id="seoBtn" type="button">Generate Title, Description &amp; Tags Prompt</button>
-        </div>
-        <p class="hint">These buttons build prompts locally in this page. No API, server, or key is needed.</p>
-        <div id="busy" class="hint" aria-live="polite"></div>
-    </section>
-
-    <section class="card output" id="promptOutput">
-        <div class="outhead">
-            <h2 id="promptHeading">Generated prompt</h2>
-            <button class="btn secondary" id="copyPromptBtn" type="button">Copy prompt</button>
-        </div>
-        <textarea id="promptResult" rows="16" readonly aria-label="Generated prompt"></textarea>
-        <div class="hint" id="promptStatus" aria-live="polite"></div>
-    </section>
-    
-    <div class="foot">YouTube Creator Studio · Two editable channel profiles · Runs locally in your browser</div>
+<section class="card" id="seoFields"><h2>6. Copy-ready SEO results</h2><p class="hint">Paste the finished AI-generated title, description and tags below. Copy each separately, or copy all three together. Tags remain one comma-separated line for direct pasting into YouTube Studio.</p>
+<div class="fieldhead"><label>YouTube title</label><button class="btn copy" data-copy="finalTitle">▢ Copy title</button></div><textarea id="finalTitle" placeholder="Paste final title…"></textarea><div id="titleLimit" class="count">0 / 100 characters</div>
+<div class="fieldhead"><label>Video description</label><button class="btn copy" data-copy="finalDescription">▢ Copy description</button></div><textarea id="finalDescription" class="long" placeholder="Paste complete description…"></textarea>
+<div class="fieldhead"><label>YouTube tags — comma-separated single line</label><button class="btn copy" data-copy="finalTags">▢ Copy all tags</button></div><textarea id="finalTags" class="tags" placeholder="tag one, tag two, తెలుగు ట్యాగ్"></textarea><div id="tagsLimit" class="count">0 / 500 characters</div>
+<div class="actions"><button class="btn secondary" id="copyAll">▢ Copy title + description + tags</button><button class="btn secondary" id="clear">Clear SEO fields</button></div><div id="copyStatus" class="status"></div></section>
+<div class="foot">YouTube Creator Studio · Two editable channel profiles · Runs locally in your browser</div>
 </main>
-
 <script>
-const $ = id => document.getElementById(id);
-function val(id) { return $(id).value.trim() }
-function selected(name) { return document.querySelector('input[name="' + name + '"]:checked')?.value || 'none' }
+const $=id=>document.getElementById(id),v=id=>$(id).value.trim(),pick=n=>document.querySelector('input[name="'+n+'"]:checked')?.value||'none';
+function channel(){let two=pick('channelPick')==='2',p=two?'2':'1';return{name:v('c'+p)|| (two?'Radhika Never Before':'Dilip Kumar Godugu'),handle:v('u'+p)||(two?'@radhikaneverbefore':'@DelixDilip'),id:v('i'+p),desc:v('d'+p)}}
+function sync(){ $('h1').textContent=v('u1')||'@DelixDilip';$('h2').textContent=v('u2')||'@radhikaneverbefore';}
+['c1','c2','u1','u2'].forEach(id=>$(id).addEventListener('input',sync));
+function data(){let c=channel();return{...c,title:v('title'),topic:v('topic')||'General video',location:v('location')||'Not specified',audience:v('audience'),keywords:v('keywords'),extra:v('extra')||'No additional details supplied; do not invent scenes or events.',lang:pick('lang'),headline:v('headline')||'Derive a short accurate headline from the topic',tc:pick('tc'),tri:pick('tri'),dbl:pick('dbl'),banner:pick('banner'),scene:pick('scene')}}
+function base(d){return`VIDEO TITLE / TOPIC: ${d.title}
+CHANNEL: ${d.name} (${d.handle})
+NICHE: ${d.topic}
+LOCATION: ${d.location}
+AUDIENCE: ${d.audience}
+KEYWORDS: ${d.keywords}
+LANGUAGE: ${d.lang}
+ACCURATE VIDEO DETAILS: ${d.extra}`}
+function thumbnail(d){let id=d.name.toLowerCase().includes('radhika')?'For any supplied reference photos, preserve the exact identity and natural facial features of the woman and all family members shown. Retain their skin tones, ages, hairstyles, bindis, jewellery, expressions and clothing. Match each person and object to the correct reference image. Do not face-swap, beautify excessively, duplicate people or alter saree colours.':'For any supplied reference photos, preserve every visible person’s exact identity, face, skin tone, age, hairstyle, clothing and natural expression. Do not replace faces, beautify excessively or duplicate people.';
+return`PROFESSIONAL YOUTUBE THUMBNAIL GENERATION PROMPT
 
-function activeChannel() {
-    const n = selected('channelPick');
-    return n === '2' ? {
-        name: val('channel2') || 'Radhika Never Before',
-        handle: val('channel2handle') || '@radhikaneverbefore',
-        id: val('channel2id'),
-        description: val('channel2desc'),
-        number: 2
-    } : {
-        name: val('channel1') || 'Dilip Kumar Godugu',
-        handle: val('channel1handle') || '@DelixDilip',
-        id: val('channel1id'),
-        description: val('channel1desc'),
-        number: 1
-    }
-}
+Create one polished, highly eye-catching, photorealistic YouTube thumbnail in 1280×720 resolution (16:9 aspect ratio) for ${d.name} (${d.handle}).
 
-function syncChannels() {
-    $('channel1Preview').textContent = val('channel1handle') || '@DelixDilip';
-    $('channel2Preview').textContent = val('channel2handle') || '@radhikaneverbefore';
-}
+${base(d)}
 
-document.querySelectorAll('#channel1,#channel2,#channel1handle,#channel2handle').forEach(el => el.addEventListener('input', syncChannels));
+THUMBNAIL HEADLINE: “${d.headline}”
 
-function details() {
-    const c = activeChannel();
-    return {
-        title: val('title'),
-        channel: c.name,
-        handle: c.handle,
-        channelId: c.id,
-        channelDescription: c.description,
-        number: c.number,
-        topic: val('topic') || 'General video',
-        location: val('location'),
-        audience: val('audience'),
-        keywords: val('keywords'),
-        descriptionData: val('descriptionData'),
-        language: selected('lang'),
-        headline: val('headline'),
-        textColor: selected('textColor'),
-        triColor: selected('triColor'),
-        doubleColor: selected('doubleColor'),
-        bannerColor: selected('bannerColor'),
-        sceneColor: selected('sceneColor')
-    }
-}
+1. REFERENCE PHOTO & IDENTITY PRESERVATION
+${id}
+Use the uploaded photos as the primary visual references. Do not infer an activity or scene that is not supported by the references or confirmed video details.
 
-function detailsText(d) {
-    return `VIDEO TITLE / TOPIC: ${d.title}
-ACTIVE CHANNEL: ${d.channel} (${d.handle})
-VIDEO TOPIC / NICHE: ${d.topic}
-LOCATION / REGION: ${d.location || 'Not specified'}
-TARGET AUDIENCE: ${d.audience || 'Telugu-speaking audience'}
-EXTRA KEYWORDS: ${d.keywords || 'Not specified'}
-CONTENT LANGUAGE: ${d.language}`
-}
+2. THUMBNAIL COMPOSITION
+Create a dynamic, professional collage or split-scene composition that accurately communicates the topic. Make the main person/object prominent, faces large, sharp and recognizable. Use supporting people and objects only when present in the supplied references or confirmed details. Keep balanced spacing and avoid overcrowding.
 
-function thumbPrompt(d) {
-    return `Act as an expert YouTube thumbnail prompt engineer and designer. Write a prompt to create one polished, photorealistic 1280×720 (16:9) YouTube thumbnail.
+3. HEADLINE DESIGN
+Display the exact supplied headline if one was entered; otherwise create a concise accurate headline from the topic. Use thick, bold, accurate Telugu typography, mobile-readable sizing and safe margins. Text colour: ${d.tc}. Preferred tri-colour palette: ${d.tri}. Alternative double-colour palette: ${d.dbl}. Use a subtle dark outline and soft shadow. Place text away from faces and important objects. Title background treatment: ${d.banner}. If NO BANNER is selected, place text directly over a naturally darker uncluttered area with outline/shadow only.
 
-${detailsText(d)}
-THUMBNAIL HEADLINE: ${d.headline || 'Create a short, compelling headline based accurately on the topic'}
-HEADLINE TEXT COLOUR: ${d.textColor === 'none' ? 'No fixed colour; choose the clearest high-contrast colour' : d.textColor}
-TRI-COLOUR TITLE PALETTE: ${d.triColor === 'none' ? 'Not selected; do not force a tri-colour palette' : d.triColor}
-DOUBLE-COLOUR TITLE PALETTE: ${d.doubleColor === 'none' ? 'Not selected; do not force a double-colour palette' : d.doubleColor}
-BACKGROUND BEHIND TITLE TEXT ONLY: ${d.bannerColor === 'none' ? 'None; do not add a banner or text box background' : d.bannerColor}
-SCENE COLOUR MOOD: ${d.sceneColor === 'none' ? 'Choose natural colours suitable for the real video topic' : d.sceneColor}
+4. BACKGROUND & COLOUR MOOD
+Use an authentic environment grounded in the supplied photos and confirmed topic. Scene mood: ${d.scene}. Enhance natural colours, clarity and contrast without artificial backgrounds or invented festival activities, people, locations or props.
 
-If reference photos are attached to the AI tool, use them as identity references and preserve each person's face, skin tone, age, hairstyle, clothing and natural appearance. Make the main subject sharp and prominent. Use an authentic topic-relevant background, bold readable Telugu headline, strong outline/shadow only as needed, safe margins, natural lighting, clean composition and correct anatomy. Do not invent events or add random text, fake logos, watermarks, or irrelevant elements. Return a prompt for the finished thumbnail image, not a thumbnail explanation.`
-}
+5. PROFESSIONAL FINISH
+Photorealistic DSLR photography, natural skin texture, crisp facial details, realistic hands and fingers, authentic fabric/object texture, cinematic but natural lighting, clean subject separation, premium editorial composition and sharp high-definition detail.
 
-function seoPrompt(d) {
-    return `Act as a YouTube SEO writer for the selected channel and its audience. Produce accurate, ready-to-use YouTube metadata in natural ${d.language} wording, using useful English keywords only where they genuinely help search. Do not invent scenes, places, people, events, claims, links, timestamps, or personal experiences.
+6. STRICT RESTRICTIONS
+No cartoon, illustration, painting, CGI, face swapping, duplicate people, distorted faces, extra fingers, altered clothing colours, fake scenes, unrelated objects, random text, fake logos, watermarks, subtitles or unnecessary decorations. Do not crop important faces or topic objects.
 
-VIDEO TITLE / TOPIC: ${d.title}
-SELECTED CHANNEL NAME: ${d.channel}
-SELECTED CHANNEL HANDLE: ${d.handle}
-SELECTED CHANNEL ID: ${d.channelId || 'Not supplied — do not invent an ID'}
-SELECTED CHANNEL DESCRIPTION: ${d.channelDescription || 'Not supplied — do not invent a channel description'}
-VIDEO TOPIC / NICHE: ${d.topic}
-LOCATION / REGION: ${d.location || 'Not specified'}
-TARGET AUDIENCE: ${d.audience || 'Telugu-speaking viewers and Telangana audience'}
-EXTRA KEYWORDS: ${d.keywords || 'Not specified'}
-CONTENT LANGUAGE: ${d.language}
-EXTRA ACCURATE VIDEO DETAILS FOR DESCRIPTION: ${d.descriptionData || 'No additional details supplied. Keep the description relevant to the title and topic without claiming specific scenes.'}
-CHANNEL CATEGORIES / NICHE OPTIONS: Daily life Vlogs, Telangana Family Vlogs, Middleclassfamily, Middleclassfamilyvlogs. Use only categories that genuinely fit the supplied video topic and selected channel; do not force irrelevant categories.
+FINAL OUTPUT: One polished, vibrant, photorealistic 1280×720 (16:9) YouTube thumbnail. Return the image prompt only, not an explanation.`}
+function seo(d){return`Act as an expert YouTube SEO writer. Create accurate ready-to-publish metadata in natural ${d.lang}. Never invent scenes, people, places, events, links, timestamps, credits or claims.
 
-OUTPUT THESE SECTIONS:
+${base(d)}
+CHANNEL ID: ${d.id||'Not supplied — omit from publish-ready description.'}
+CHANNEL DESCRIPTION: ${d.desc||'Not supplied — do not invent one.'}
+
+OUTPUT EXACTLY THESE THREE SECTIONS:
 
 1. YOUTUBE TITLE
-Write ONE engaging, accurate title with a maximum of 100 characters including spaces and punctuation. Keep the title under the limit and show the character count separately. Use the selected content language. Make the wording appealing to the intended audience without misleading clickbait.
+Write ONE engaging, accurate title, maximum 100 characters including spaces and punctuation. If it is shorter, add only a few relevant hashtags such as #dailyvlog or #familyvlog if genuinely useful; never force hashtags or exceed 100 characters. Show character count separately.
 
 2. VIDEO DESCRIPTION
-Write a useful, ready-to-paste description with: (a) a compelling first 1–2 lines; (b) a fuller summary of the topic based only on supplied facts; (c) relevant context and keywords naturally included; (d) the supplied extra video details, if any; (e) explicitly include the selected channel name “${d.channel}” in a natural sentence; (f) include the selected channel handle ${d.handle}; (g) include the actual channel ID “${d.channelId || 'Not supplied'}” only when supplied; if it is not supplied, do not invent an ID; (h) use this channel description naturally if supplied: “${d.channelDescription || 'Not supplied'}”; if it is not supplied, do not fabricate a channel description; (i) a polite like/comment/share/subscribe call to action; (j) relevant chapters only if timestamps were supplied; (k) finish the description with a dedicated HASHTAGS line containing 3–8 relevant hashtags beginning with #, including topic/niche hashtags and the selected channel name/handle only when it forms a sensible hashtag. Do not confuse hashtags in the description with the comma-separated YouTube tags field. Do not invent contact details, social links, timestamps, credits, people, places, or events. Avoid keyword stuffing and generic filler.
+Write a ready-to-paste description with compelling first 1–2 lines, a fuller summary based only on supplied facts, natural keywords, and a polite like/comment/share/subscribe CTA. Include the exact channel name "${d.name}" and handle ${d.handle}. Include channel ID and channel description only if actually supplied. Do not write “Not supplied”. Add relevant channel hashtags such as #dailyvlog, #familyvlog, #middleclassfamily and #middleclassfamilyvlogs only when they fit. Use about 5–10 relevant hashtags without stuffing. Add chapters only if timestamps were supplied. Finish with a dedicated final HASHTAGS line. No invented links, contact details, people, places or events.
 
 3. YOUTUBE TAGS
-Return ONLY one single line of relevant tags separated by commas, for example: tag one, tag two, తెలుగు ట్యాగ్. Do not number the tags, do not put each tag on a new line, do not wrap the whole line in quotes or a code block, and do not add a heading inside the tag line. Include relevant Telugu-script terms, English keywords, and transliterated spellings where useful, plus the topic, relevant niche/category terms, and selected channel name/handle where appropriate. Keep the entire tag line within YouTube's 500-character tag limit, including commas and spaces; show the character count separately. Avoid duplicates, irrelevant trends, and unrelated tags.
+Return EXACTLY ONE continuous comma-separated line ready to paste into YouTube Studio. Put a comma and one space after every tag. Include relevant Telugu-script terms, English keywords and useful transliterations, topic, niche and channel name/handle where appropriate. Maximum 500 characters INCLUDING commas and spaces. Show character count separately. No numbering, bullets, line breaks, quotes, code block or explanatory text inside the tag line. Avoid duplicates and irrelevant tags.
 
-Use these extra keywords only where relevant: ${d.keywords || 'none supplied'}. Audience: ${d.audience || 'Telugu-speaking viewers and Telangana audience'}. Location context only if relevant: ${d.location || 'not supplied'}.
-
-Ensure VIDEO DESCRIPTION contains the selected channel name, selected handle, the channel ID if the user supplied it, the channel description if the user supplied it, and a final line of relevant #hashtags. Do not write “Not supplied” in the publish-ready description; simply omit missing ID or channel-description details. Return exactly these three sections: YOUTUBE TITLE, VIDEO DESCRIPTION, YOUTUBE TAGS. No extra commentary.`
-}
-
-function valid() {
-    if (!val('title')) {
-        $('busy').textContent = 'Please enter a video title or topic first.';
-        $('busy').style.color = '#c62828';
-        $('title').focus();
-        return false;
-    }
-    $('busy').style.color = '';
-    return true;
-}
-
-function showPrompt(mode) {
-    if (!valid()) return;
-    const d = details();
-    const prompt = mode === 'thumbnail' ? thumbPrompt(d) : seoPrompt(d);
-    $('promptHeading').textContent = mode === 'thumbnail' ? 'Generated Thumbnail Prompt' : 'Generated Title, Description & Tags Prompt';
-    $('promptResult').value = prompt;
-    $('promptOutput').classList.add('show');
-    $('busy').textContent = 'Prompt generated successfully. Copy it and paste it into your preferred AI tool.';
-    $('promptStatus').textContent = 'Prompt created locally — no API used.';
-    $('promptOutput').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-$('thumbBtn').addEventListener('click', () => showPrompt('thumbnail'));
-$('seoBtn').addEventListener('click', () => showPrompt('seo'));
-
-$('copyPromptBtn').addEventListener('click', async () => {
-    const t = val('promptResult');
-    try {
-        await navigator.clipboard.writeText(t);
-    } catch (e) {
-        $('promptResult').focus();
-        $('promptResult').select();
-        document.execCommand('copy');
-    }
-    $('promptStatus').textContent = 'Prompt copied to clipboard.';
-});
-
-$('photos').addEventListener('change', e => {
-    const box = $('previews');
-    box.innerHTML = '';
-    Array.from(e.target.files || []).slice(0, 8).forEach(file => {
-        const img = document.createElement('img');
-        img.alt = file.name;
-        img.title = file.name;
-        img.src = URL.createObjectURL(file);
-        box.appendChild(img);
-    });
-});
-
-$('title').addEventListener('input', () => {
-    const n = $('title').value.length;
-    $('titleCount').textContent = n + ' characters · YouTube title limit: 100';
-    $('titleCount').classList.toggle('over', n > 100);
-});
-
-syncChannels();
-</script>
-</body>
-</html>
+Keep title within 100 characters and tags within 500 characters. Return exactly YOUTUBE TITLE, VIDEO DESCRIPTION, YOUTUBE TAGS. No extra commentary.`}
+function show(mode){if(!v('title')){$('busy').textContent='Please enter a video title or topic first.';return}let d=data();$('promptHeading').textContent=mode==='thumb'?'Professional Thumbnail Generation Prompt':'YouTube SEO Prompt';$('promptResult').value=mode==='thumb'?thumbnail(d):seo(d);$('promptOutput').classList.add('show');$('busy').textContent='Prompt generated. Copy it and paste into your AI tool.';$('promptOutput').scrollIntoView({behavior:'smooth',block:'start'})}
+$('thumbBtn').onclick=()=>show('thumb');$('seoBtn').onclick=()=>show('seo');
+async function copy(text){if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text);let t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();let ok=document.execCommand('copy');t.remove();if(!ok)throw Error('Copy failed')}
+$('copyPrompt').onclick=async()=>{try{await copy(v('promptResult'));$('promptStatus').textContent='✓ Prompt copied.'}catch(e){$('promptStatus').textContent='Select and copy the prompt manually.'}};
+document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{try{await copy($(b.dataset.copy).value);$('copyStatus').textContent='✓ Copied successfully.'}catch(e){$('copyStatus').textContent='Copy failed; select and copy manually.'}});
+$('copyAll').onclick=async()=>{let s=`YOUTUBE TITLE\n${v('finalTitle')}\n\nVIDEO DESCRIPTION\n${v('finalDescription')}\n\nYOUTUBE TAGS\n${v('finalTags')}`;try{await copy(s);$('copyStatus').textContent='✓ Title, description and tags copied together.'}catch(e){$('copyStatus').textContent='Copy failed; copy each field manually.'}};
+$('clear').onclick=()=>{['finalTitle','finalDescription','finalTags'].forEach(x=>$(x).value='');counts();$('copyStatus').textContent='SEO fields cleared.'};
+function counts(){let a=$('finalTitle').value.length,b=$('finalTags').value.length;$('titleLimit').textContent=a+' / 100 characters'+(a>100?' — over limit':'');$('tagsLimit').textContent=b+' / 500 characters'+(b>500?' — over limit':'');$('titleLimit').classList.toggle('over',a>100);$('tagsLimit').classList.toggle('over',b>500)}
+$('finalTitle').oninput=counts;$('finalTags').oninput=counts;$('title').oninput=()=>{$('titleCount').textContent=$('title').value.length+' characters · Suggested title maximum: 100';$('titleCount').classList.toggle('over',$('title').value.length>100)};
+$('photos').onchange=e=>{let box=$('previews');box.innerHTML='';Array.from(e.target.files||[]).slice(0,8).forEach(f=>{let im=document.createElement('img');im.src=URL.createObjectURL(f);im.alt=f.name;box.appendChild(im)})};sync();counts();
+</script></main></body></html>
